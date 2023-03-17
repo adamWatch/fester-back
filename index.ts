@@ -1,5 +1,4 @@
 import express from 'express';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import cors from 'cors';
 import 'express-async-errors';
 
