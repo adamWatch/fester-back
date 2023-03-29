@@ -15,18 +15,6 @@ export class User implements UserEntity {
 
 	public password: string;
 
-	public allExp: number;
-
-	public workoutExp: number;
-
-	public learningExp: number;
-
-	public nutritionExp: number;
-
-	public recreationExp: number;
-
-	public hobbyExp: number;
-
 	constructor(obj:any) {
 		if (!obj.username || obj.length > 34) {
 			throw new ValidationError('Username not exist or too long max length is 34');
@@ -36,12 +24,6 @@ export class User implements UserEntity {
 		this.username = obj.username;
 		this.email = obj.email;
 		this.password = obj.password;
-		this.allExp = obj.allExp;
-		this.workoutExp = obj.workoutExp;
-		this.learningExp = obj.learningExp;
-		this.nutritionExp = obj.nutritionExp;
-		this.recreationExp = obj.recreationExp;
-		this.hobbyExp = obj.hobbyExp;
 	}
 
 	static async getOne(id:string):Promise<UserEntity |null> {
