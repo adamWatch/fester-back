@@ -1,5 +1,5 @@
 import { FieldPacket } from 'mysql2';
-// import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import { pool } from '../utils/db';
 import { UserEntity } from '../types/user';
 import { ValidationError } from '../utils/error';
@@ -32,5 +32,15 @@ export class User implements UserEntity {
 		}) as UserResults;
 
 		return results.length === 0 ? null : new User(results[0]);
+	}
+
+	async insert(): Promise<void> {
+		if (!this.id) {
+			this.id = uuid();
+		} else {
+			throw new Error('Cannot insert something that is already inserted!');
+		}
+
+		await pool.execute('INSERT INTO `users`(`id`, `username`, `email`, `password`) VALUES(:id, :username, :email, :password)', this);
 	}
 }

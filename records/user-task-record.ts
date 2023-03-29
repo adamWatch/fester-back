@@ -1,8 +1,9 @@
-// import { FieldPacket } from 'mysql2';
-// import { pool } from '../utils/db';
+import { FieldPacket } from 'mysql2';
+import { pool } from '../utils/db';
 import { UserTaskEntity } from '../types/user';
 // import { ValidationError } from '../utils/error';
 
+type UserResults = [UserTaskEntity[], FieldPacket[]]
 export class UserTask implements UserTaskEntity {
 	public id: string;
 
@@ -44,5 +45,13 @@ export class UserTask implements UserTaskEntity {
 		this.nutritionTask = obj.nutritionTask;
 		this.recreationTask = obj.recreationTask;
 		this.hobbyTask = obj.hobbyTask;
+	}
+
+	static async getOne(id:string):Promise<UserTaskEntity |null> {
+		const [results,] = await pool.execute('SELECT * FROM `users` WHERE id = :id', {
+			id,
+		}) as UserResults;
+
+		return results.length === 0 ? null : new UserTask(results[0]);
 	}
 }
