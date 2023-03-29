@@ -7,7 +7,7 @@ export interface UserEntity{
 }
 
 export interface UserTaskEntity{
-    id:string;
+    id?:string;
     username:string;
     allExp:number;
     workoutExp:number;

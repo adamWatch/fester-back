@@ -5,7 +5,7 @@ import { UserTaskEntity } from '../types/user';
 
 type UserResults = [UserTaskEntity[], FieldPacket[]]
 export class UserTask implements UserTaskEntity {
-	public id: string;
+	public id?: string;
 
 	public username: string;
 
@@ -53,5 +53,9 @@ export class UserTask implements UserTaskEntity {
 		}) as UserResults;
 
 		return results.length === 0 ? null : new UserTask(results[0]);
+	}
+
+	async insert(): Promise<void> {
+		await pool.execute('INSERT INTO `users_data`(`id`, `username`, `allExp`, `workoutExp`,`learningExp`,`nutritionExp`,`recreationExp`,`hobbyExp`,`workoutTask`,`learningTask`,`nutritionTask`, `recreationTask`,`hobbyTask`) VALUES(:id, :username, :allExp, :workoutExp,:learningExp, :nutritionExp, :recreationExp, :hobbyExp,:workoutTask,:learningTask,:nutritionTask,:recreationTask,:hobbyTask )', this);
 	}
 }
