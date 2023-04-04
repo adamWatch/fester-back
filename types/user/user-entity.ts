@@ -1,6 +1,6 @@
 export interface UserEntity{
     id?:string;
-    username:string;
+    username?:string|undefined;
     password:string;
     email:string;
 
