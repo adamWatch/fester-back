@@ -1,21 +1,17 @@
 import { Router } from 'express';
 import { User } from '../records/user-record';
 import { UserTask } from '../records/user-task-record';
+import { Notice } from '../types/notice/notice';
 
 export const userRegister = Router()
 
-	.post('/', async (req, res) => {
+	.post('/register', async (req, res) => {
 		const { body, } = req;
 
 		const placeholder = 'You not have any task, please add.';
 
-		console.log(body);
-		const user = new User({ username: 'Maxx', password: '1234', email: 'rad@fa', });
-		console.log(user);
-
+		const user = new User({ username: body.username, password: body.password, email: body.email, });
 		user.insert();
-
-		console.log(user.id);
 
 		const userData = new UserTask({
 			id: user.id,
@@ -26,15 +22,20 @@ export const userRegister = Router()
 			nutritionExp: 0,
 			recreationExp: 0,
 			hobbyExp: 0,
-			workoutTask: JSON.parse(placeholder),
-			learningTask: JSON.parse(placeholder),
-			nutritionTask: JSON.parse(placeholder),
-			recreationTask: JSON.parse(placeholder),
-			hobbyTask: JSON.parse(placeholder),
+			workoutTask: JSON.stringify(placeholder),
+			learningTask: JSON.stringify(placeholder),
+			nutritionTask: JSON.stringify(placeholder),
+			recreationTask: JSON.stringify(placeholder),
+			hobbyTask: JSON.stringify(placeholder),
 
 		});
-		console.log(userData);
 		userData.insert();
 
-		res.json('working');
+		const notice:Notice = {
+			isVisible: true,
+			noticeText: 'You are register you can log in',
+			noticeColor: 'green',
+		};
+
+		res.json(notice);
 	});
