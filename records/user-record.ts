@@ -16,7 +16,7 @@ export class User implements UserEntity {
 	public password: string;
 
 	constructor(obj:any) {
-		if (!obj.username || obj.length > 34) {
+		if (!obj.username || obj.length > 50) {
 			throw new ValidationError('Username not exist or too long max length is 34');
 		}
 
