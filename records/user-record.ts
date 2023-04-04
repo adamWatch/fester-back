@@ -34,6 +34,14 @@ export class User implements UserEntity {
 		return results.length === 0 ? null : new User(results[0]);
 	}
 
+	static async getOneByEmail(email:string):Promise<UserEntity |null> {
+		const [results,] = await pool.execute('SELECT * FROM `users` WHERE email = :email', {
+			email,
+		}) as UserResults;
+
+		return results.length === 0 ? null : new User(results[0]);
+	}
+
 	async insert(): Promise<void> {
 		if (!this.id) {
 			this.id = uuid();
