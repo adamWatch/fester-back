@@ -3,3 +3,7 @@ export interface Notice{
     noticeText:string;
     noticeColor:string;
 }
+
+export interface NoticeWithId extends Notice{
+    id:string;
+}
