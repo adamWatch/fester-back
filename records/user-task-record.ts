@@ -21,15 +21,17 @@ export class UserTask implements UserTaskEntity {
 
 	public hobbyExp: number;
 
-	public workoutTask: JSON;
+	public workoutTask: string;
 
-	public learningTask: JSON;
+	public learningTask: string;
 
-	public nutritionTask: JSON;
+	public nutritionTask: string;
 
-	public recreationTask: JSON;
+	public recreationTask: string;
 
-	public hobbyTask: JSON;
+	public hobbyTask: string;
+
+	public idTasks: number;
 
 	constructor(obj:any) {
 		this.id = obj.id;
@@ -45,10 +47,11 @@ export class UserTask implements UserTaskEntity {
 		this.nutritionTask = obj.nutritionTask;
 		this.recreationTask = obj.recreationTask;
 		this.hobbyTask = obj.hobbyTask;
+		this.idTasks = obj.idTasks;
 	}
 
 	static async getOne(id:string):Promise<UserTaskEntity |null> {
-		const [results,] = await pool.execute('SELECT * FROM `users` WHERE id = :id', {
+		const [results,] = await pool.execute('SELECT * FROM `users_data` WHERE id = :id', {
 			id,
 		}) as UserResults;
 
@@ -56,6 +59,14 @@ export class UserTask implements UserTaskEntity {
 	}
 
 	async insert(): Promise<void> {
-		await pool.execute('INSERT INTO `users_data`(`id`, `username`, `allExp`, `workoutExp`,`learningExp`,`nutritionExp`,`recreationExp`,`hobbyExp`,`workoutTask`,`learningTask`,`nutritionTask`, `recreationTask`,`hobbyTask`) VALUES(:id, :username, :allExp, :workoutExp,:learningExp, :nutritionExp, :recreationExp, :hobbyExp,:workoutTask,:learningTask,:nutritionTask,:recreationTask,:hobbyTask )', this);
+		await pool.execute('INSERT INTO `users_data`(`id`, `username`, `allExp`, `workoutExp`,`learningExp`,`nutritionExp`,`recreationExp`,`hobbyExp`,`workoutTask`,`learningTask`,`nutritionTask`, `recreationTask`,`hobbyTask`,`idTasks`) VALUES(:id, :username, :allExp, :workoutExp,:learningExp, :nutritionExp, :recreationExp, :hobbyExp,:workoutTask,:learningTask,:nutritionTask,:recreationTask,:hobbyTask,:idTasks )', this);
+	}
+
+	static async insertTask(task:string, id:string):Promise<void> {
+		await pool.execute('UPDATE `motivator_data`.`users_data` SET `workoutTask`=:task WHERE  `id` = :id;', { task, id, });
+	}
+
+	static async updateTaskId(taskId:string, id:string):Promise<void> {
+		await pool.execute('UPDATE `motivator_data`.`users_data` SET `idTasks`=:taskId WHERE  `id` = :id;', { taskId, id, });
 	}
 }
