@@ -15,9 +15,35 @@ export interface UserTaskEntity{
     nutritionExp:number;
     recreationExp:number;
     hobbyExp:number;
-    workoutTask:JSON;
-    learningTask:JSON;
-    nutritionTask:JSON;
-    recreationTask:JSON;
-    hobbyTask:JSON;
+    workoutTask:string;
+    learningTask:string;
+    nutritionTask:string;
+    recreationTask:string;
+    hobbyTask:string;
+    idTasks:number;
+}
+
+export interface UserExpWorkout{
+    id?:string;
+    username:string;
+    allExp:number;
+    workoutExp:number;
+    workoutTask:string;
+    idTasks:number;
+}
+
+export interface UserExpLearnig{
+    id?:string;
+    username:string;
+    allExp:number;
+    learningExp:number;
+    learningTask:string;
+}
+
+export interface UserExpNutrition{
+    id?:string;
+    username:string;
+    allExp:number;
+    learningExp:number;
+    learningTask:string;
 }
