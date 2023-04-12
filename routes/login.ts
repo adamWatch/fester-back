@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { User } from '../records/user-record';
 import { Notice, NoticeWithId } from '../types';
 import { UserLogged } from '../records/user-logged-record';
@@ -6,7 +6,7 @@ import { UserLogged } from '../records/user-logged-record';
 export const LoginRouter = Router()
 
 	// eslint-disable-next-line consistent-return
-	.post('/login', async (req, res) => {
+	.post('/login', async (req:Request, res:Response) => {
 		const { body, } = req;
 		const user = await User.getOneByEmail(body.email);
 		console.log(user);
