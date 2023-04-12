@@ -1,6 +1,2 @@
-Jest to szablon z ostaniego etapu kursu ktory pragnę sobie zachować i wykorzystywać 
-w package locku są wszystkie wymagane moduły
-
-Folder types pomaga wspołdzielić typy pomiedzy backendem a frontem. 
-Jak sprawić by typy działały na froncie:
-
+Program służacy do motywowania się. 
+Aby go odpalić nalezy pobrać jeszcze jego czesć front-endową
