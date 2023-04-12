@@ -8,7 +8,7 @@ export const userRegister = Router()
 	.post('/register', async (req, res) => {
 		const { body, } = req;
 
-		const placeholder = 'You not have any task, please add.';
+		const placeholder = 'None';
 
 		const user = new User({ username: body.username, password: body.password, email: body.email, });
 		user.insert();
@@ -27,6 +27,7 @@ export const userRegister = Router()
 			nutritionTask: JSON.stringify(placeholder),
 			recreationTask: JSON.stringify(placeholder),
 			hobbyTask: JSON.stringify(placeholder),
+			idTasks: 1,
 
 		});
 		userData.insert();
